@@ -7,7 +7,7 @@ import 'package:student_database/features/addstudent/ui/add_screen.dart';
 import '../bloc/students_bloc.dart';
 
 class StudentsPage extends StatefulWidget {
-  StudentsPage({super.key});
+  const StudentsPage({super.key});
 
   @override
   State<StudentsPage> createState() => _StudentsPageState();
@@ -43,7 +43,7 @@ class _StudentsPageState extends State<StudentsPage> {
       },
       builder: (context, state) {
         if (state is StudentsLoadingState) {
-          return Scaffold(
+          return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
             ),

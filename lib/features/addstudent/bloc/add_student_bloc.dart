@@ -32,9 +32,6 @@ class AddStudentBloc extends Bloc<AddStudentEvent, AddStudentState> {
           division: division,
           address: address,
           imageBytes: image);
-
-      // Re-fetch data after inserting a new student
-      final dataList = await StudentDatabase.getAllStudents();
       emit(AddStudentAddedState());
     } catch (e) {
       emit(AddStudentErrorState());
