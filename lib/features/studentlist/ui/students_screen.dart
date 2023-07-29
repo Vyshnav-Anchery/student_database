@@ -3,32 +3,32 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:student_database/features/addstudent/ui/add_screen.dart';
-import 'package:student_database/features/details/ui/details.dart';
 
-import '../bloc/home_bloc.dart';
+import '../bloc/students_bloc.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({super.key});
+class StudentsPage extends StatefulWidget {
+  StudentsPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<StudentsPage> createState() => _StudentsPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _StudentsPageState extends State<StudentsPage> {
   @override
   void initState() {
-    homeBloc.add(HomeInitialEvent());
+    studentsBloc.add(StudentsInitialEvent());
+
     super.initState();
   }
 
-  final HomeBloc homeBloc = HomeBloc();
+  final StudentsBloc studentsBloc = StudentsBloc();
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer(
-      bloc: homeBloc,
-      listenWhen: (previous, current) => current is HomeActionState,
-      buildWhen: (previous, current) => current is! HomeActionState,
+      bloc: studentsBloc,
+      listenWhen: (previous, current) => current is StudentsActionState,
+      buildWhen: (previous, current) => current is! StudentsActionState,
       listener: (context, state) {
         switch (state.runtimeType) {
           case NavigateToStudentsDetailsPageActionState:
@@ -42,25 +42,25 @@ class _HomePageState extends State<HomePage> {
         }
       },
       builder: (context, state) {
-        if (state is HomeLoadingState) {
-          return const Scaffold(
+        if (state is StudentsLoadingState) {
+          return Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
             ),
           );
-        } else if (state is HomeLoadedState) {
+        } else if (state is StudentsLoadedState) {
           return Scaffold(
               appBar: AppBar(
                 title: const Text("Studentdb"),
                 actions: [
                   IconButton(
                       onPressed: () {
-                        homeBloc.add(StudentButtonNavigateEvent());
+                        studentsBloc.add(StudentButtonNavigateEvent());
                       },
                       icon: const Icon(Icons.details)),
                   IconButton(
                       onPressed: () {
-                        homeBloc.add(StudentButtonClearEvent());
+                        studentsBloc.add(StudentButtonClearEvent());
                       },
                       icon: Icon(Icons.delete))
                 ],

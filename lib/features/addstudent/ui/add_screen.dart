@@ -1,8 +1,8 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../bloc/add_student_bloc.dart';
@@ -19,6 +19,7 @@ class AddStudent extends StatelessWidget {
   final TextEditingController stdEditingController = TextEditingController();
   final AddStudentBloc addBloc = AddStudentBloc();
   late Uint8List imagebytes;
+  late var compressed;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer(
@@ -27,12 +28,13 @@ class AddStudent extends StatelessWidget {
         listener: (context, state) {
           if (state is AddStudentAddedState) {
             ScaffoldMessenger.of(context)
-              .showSnackBar(const SnackBar(content: Text('Student Added')));
+                .showSnackBar(const SnackBar(content: Text('Student Added')));
           }
         },
         bloc: addBloc,
         builder: (context, state) {
           return Scaffold(
+            appBar: AppBar(),
             body: Form(
               child: Column(
                 children: [
@@ -71,6 +73,11 @@ class AddStudent extends StatelessWidget {
                         final myfile = await ImagePicker()
                             .pickImage(source: ImageSource.gallery);
                         imagebytes = await myfile!.readAsBytes();
+                        compressed =
+                            await FlutterImageCompress.compressWithList(
+                          imagebytes,
+                          quality: 85,
+                        );
                       },
                       child: const Text("Pick Image From Gallery")),
                   ElevatedButton(
@@ -83,7 +90,7 @@ class AddStudent extends StatelessWidget {
                             bloodgrp: bloodEditingController.text,
                             number: int.parse(numberEditingController.text),
                             division: stdEditingController.text,
-                            image: imagebytes,
+                            image: compressed,
                           ),
                         );
                       },
