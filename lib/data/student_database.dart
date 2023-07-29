@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data';
 import 'package:path/path.dart';
 
 import 'package:sqflite/sqflite.dart';
@@ -18,7 +19,9 @@ class StudentDatabase {
       contact REAL,
       bloodgroup TEXT,
       address TEXT,
-      division TEXT)''');
+      division TEXT,
+      image TEXT
+      )''');
   }
 
   static Future<int> insertStudent({
@@ -28,6 +31,7 @@ class StudentDatabase {
     required String bloodgroup,
     required String address,
     required String division,
+    required Uint8List imageBytes,
   }) async {
     final db = await _openDb();
     final data = {
@@ -36,7 +40,8 @@ class StudentDatabase {
       'contact': contact,
       'bloodgroup': bloodgroup,
       'address': address,
-      'division': division
+      'division': division,
+      'image': imageBytes,
     };
     return await db.insert('student', data);
   }
@@ -53,12 +58,8 @@ class StudentDatabase {
 
   static Future<Map<String, dynamic>?> getSingleData(int id) async {
     final db = await _openDb();
-    List<Map<String, dynamic>> result = await db.query(
-      'student',
-      where: 'id=?',
-      whereArgs: [id],
-      limit: 1,
-    );
+    List<Map<String, dynamic>> result =
+        await db.query('student', where: 'id=?', whereArgs: [id], limit: 1);
     return result.isNotEmpty ? result.first : null;
   }
 
@@ -70,5 +71,11 @@ class StudentDatabase {
   static Future<List<Map<String, dynamic>>> getAllStudents() async {
     final db = await _openDb();
     return db.query('student');
+  }
+
+  static Future<void> clearDb() async {
+    final dbPath = await getDatabasesPath();
+    final path = join(dbPath, "student_db.db");
+    await deleteDatabase(path);
   }
 }
