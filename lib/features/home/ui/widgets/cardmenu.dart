@@ -4,7 +4,16 @@ import 'package:student_database/features/home/bloc/home_bloc.dart';
 
 class CardWidget extends StatelessWidget {
   final HomeBloc homeBloc;
-  const CardWidget({super.key,required this.homeBloc});
+  final String path;
+  final event;
+  final String buttonText;
+  const CardWidget({
+    super.key,
+    required this.homeBloc,
+    required this.event,
+    required this.path,
+    required this.buttonText,
+  });
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -12,28 +21,28 @@ class CardWidget extends StatelessWidget {
       child: InkWell(
         highlightColor: Colors.transparent,
         splashColor: Colors.white,
-        onTap: () => homeBloc.add(HomeNavigateToAddEvent()),
+        onTap: () => homeBloc.add(event),
         child: Column(
           children: [
             SvgPicture.asset(
-              "assets/svg/addstudent.svg",
+              path,
               fit: BoxFit.contain,
               height: MediaQuery.sizeOf(context).width / 1.5,
             ),
             const SizedBox(
               height: 20,
             ),
-            const Row(
+             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Add Student",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+                  buttonText,
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   maxRadius: 10,
                   child: Icon(Icons.arrow_forward_ios_rounded, size: 10),
                 )

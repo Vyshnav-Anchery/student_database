@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:student_database/features/home/bloc/home_bloc.dart';
 import 'package:student_database/features/studentlist/ui/students_screen.dart';
 
@@ -19,16 +18,19 @@ class HomeScreen extends StatelessWidget {
         buildWhen: (previous, current) => current is! HomeActionState,
         listener: (context, state) {
           if (state is HomeNavigateToAddingPageActionState) {
-            print("asdd");
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => AddStudentPage()));
+          } else if (state is HomeNavigateToStudentListPageActionState) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const StudentsPage(),
+                ));
           }
         },
         builder: (context, state) {
           return Scaffold(
-              appBar: AppBar(
-                  // backgroundColor: Colors.blueAccent,
-                  ),
+              appBar: AppBar(),
               drawer: Container(
                 color: Colors.white,
                 width: MediaQuery.sizeOf(context).width / 1.5,
@@ -37,55 +39,18 @@ class HomeScreen extends StatelessWidget {
                 child: Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    // mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CardWidget(homeBloc: homeBloc),
-                      Card(
-                        margin:
-                            const EdgeInsets.only(top: 20, left: 20, right: 20),
-                        child: InkWell(
-                          highlightColor: Colors.transparent,
-                          splashColor: Colors.white,
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const StudentsPage(),
-                              )),
-                          child: Column(
-                            children: [
-                              SvgPicture.asset(
-                                "assets/svg/viewstudent.svg",
-                                fit: BoxFit.contain,
-                                height: MediaQuery.sizeOf(context).width / 1.5,
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              const Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "View Students",
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w300),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  CircleAvatar(
-                                    maxRadius: 10,
-                                    child: Icon(Icons.arrow_forward_ios_rounded,
-                                        size: 10),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              )
-                            ],
-                          ),
-                        ),
+                      CardWidget(
+                        homeBloc: homeBloc,
+                        path: "assets/svg/addstudent.svg",
+                        event: HomeNavigateToAddEvent(),
+                        buttonText: "Add Student",
+                      ),
+                      CardWidget(
+                        homeBloc: homeBloc,
+                        event: HomeNavigateToStudentListEvent(),
+                        path: "assets/svg/viewstudent.svg",
+                        buttonText: "View Students",
                       ),
                     ],
                   ),

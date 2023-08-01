@@ -8,6 +8,7 @@ part 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitialState()) {
     on<HomeNavigateToAddEvent>(homeNavigateToAddEvent);
+    on<HomeNavigateToStudentListEvent>(homeNavigateToStudentListEvent);
   }
 
   FutureOr<void> homeNavigateToAddEvent(
@@ -17,5 +18,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } catch (e) {
       print(e);
     }
+  }
+
+  FutureOr<void> homeNavigateToStudentListEvent(
+      HomeNavigateToStudentListEvent event, Emitter<HomeState> emit) {
+    emit(HomeNavigateToStudentListPageActionState());
   }
 }

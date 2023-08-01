@@ -7,3 +7,5 @@ class HomeActionState extends HomeState {}
 class HomeInitialState extends HomeState {}
 
 class HomeNavigateToAddingPageActionState extends HomeActionState {}
+
+class HomeNavigateToStudentListPageActionState extends HomeActionState {}
