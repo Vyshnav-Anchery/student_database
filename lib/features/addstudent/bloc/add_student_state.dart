@@ -2,7 +2,7 @@ part of 'add_student_bloc.dart';
 
 class AddStudentState {}
 
-class AddStudentInitial extends AddStudentState {}
+class AddStudentInitialState extends AddStudentState {}
 
 class AddStudentAddedState extends AddStudentState {}
 

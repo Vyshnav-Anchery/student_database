@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:student_database/features/addstudent/ui/add_screen.dart';
@@ -51,7 +49,7 @@ class _StudentsPageState extends State<StudentsPage> {
         } else if (state is StudentsLoadedState) {
           return Scaffold(
               appBar: AppBar(
-                title: const Text("Studentdb"),
+                title: const Text("Student List"),
                 actions: [
                   IconButton(
                       onPressed: () {
@@ -62,7 +60,7 @@ class _StudentsPageState extends State<StudentsPage> {
                       onPressed: () {
                         studentsBloc.add(StudentButtonClearEvent());
                       },
-                      icon: Icon(Icons.delete))
+                      icon: const Icon(Icons.delete))
                 ],
               ),
               body: ListView.builder(
@@ -74,7 +72,7 @@ class _StudentsPageState extends State<StudentsPage> {
                       ? CircleAvatar(
                           backgroundImage: MemoryImage(img),
                         )
-                      : Icon(Icons.person_sharp); // Placeholder for no image
+                      : const Icon(Icons.person_sharp); // Placeholder for no image
 
                   return ListTile(
                     leading: imageWidget,
@@ -85,7 +83,7 @@ class _StudentsPageState extends State<StudentsPage> {
                 },
               ));
         } else
-          return SizedBox();
+          return const SizedBox();
       },
     );
   }

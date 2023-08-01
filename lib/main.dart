@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'features/home/ui/home.dart';
 import 'features/studentlist/bloc/students_bloc.dart';
-import 'features/studentlist/ui/students_screen.dart';
-
 
 void main() => runApp(MultiBlocProvider(
       providers: [
@@ -25,10 +24,16 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurpleAccent),
+          primaryColor: Colors.deepPurpleAccent,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.deepPurpleAccent,
+            titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
+            iconTheme: IconThemeData(color: Colors.white),
+          ),
           useMaterial3: true,
         ),
-        home:  StudentsPage(),
+        home: HomeScreen(),
       ),
     );
   }
