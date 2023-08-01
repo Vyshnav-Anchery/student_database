@@ -12,6 +12,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> homeNavigateToAddEvent(
       HomeNavigateToAddEvent event, Emitter<HomeState> emit) {
-    emit(HomeNavigateToAddingPageActionState());
+    try {
+      emit(HomeNavigateToAddingPageActionState());
+    } catch (e) {
+      print(e);
+    }
   }
 }

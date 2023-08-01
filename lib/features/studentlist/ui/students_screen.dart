@@ -15,7 +15,6 @@ class _StudentsPageState extends State<StudentsPage> {
   @override
   void initState() {
     studentsBloc.add(StudentsInitialEvent());
-
     super.initState();
   }
 
@@ -33,7 +32,7 @@ class _StudentsPageState extends State<StudentsPage> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddStudent(),
+                  builder: (context) => AddStudentPage(),
                 ));
             break;
           default:
@@ -72,7 +71,8 @@ class _StudentsPageState extends State<StudentsPage> {
                       ? CircleAvatar(
                           backgroundImage: MemoryImage(img),
                         )
-                      : const Icon(Icons.person_sharp); // Placeholder for no image
+                      : const Icon(
+                          Icons.person_sharp); // Placeholder for no image
 
                   return ListTile(
                     leading: imageWidget,
@@ -82,8 +82,9 @@ class _StudentsPageState extends State<StudentsPage> {
                   );
                 },
               ));
-        } else
+        } else {
           return const SizedBox();
+        }
       },
     );
   }

@@ -8,9 +8,8 @@ import 'package:image_picker/image_picker.dart';
 
 import '../bloc/add_student_bloc.dart';
 
-class AddStudent extends StatelessWidget {
-  AddStudent({super.key});
-
+class AddStudentPage extends StatelessWidget {
+  AddStudentPage({super.key});
   final TextEditingController nameEditingController = TextEditingController();
   final TextEditingController ageEditingController = TextEditingController();
   final TextEditingController numberEditingController = TextEditingController();
@@ -21,7 +20,7 @@ class AddStudent extends StatelessWidget {
   final AddStudentBloc addBloc = AddStudentBloc();
   @override
   Widget build(BuildContext context) {
-    XFile? myfile;
+    var myfile;
     late Uint8List imagebytes;
     late var compressed;
     return BlocConsumer(
@@ -99,9 +98,6 @@ class AddStudent extends StatelessWidget {
                             controller: stdEditingController,
                           ),
                           const SizedBox(height: 20),
-                          SizedBox(
-                            child: myfile != null ? Text(myfile!.path) : null,
-                          ),
                           ElevatedButton(
                               onPressed: () async {
                                 myfile = await ImagePicker()

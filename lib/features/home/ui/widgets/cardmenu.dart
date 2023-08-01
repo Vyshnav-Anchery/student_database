@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../../addstudent/ui/add_screen.dart';
+import 'package:student_database/features/home/bloc/home_bloc.dart';
 
 class CardWidget extends StatelessWidget {
-  const CardWidget({
-    super.key,
-  });
-
+  final HomeBloc homeBloc;
+  const CardWidget({super.key,required this.homeBloc});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -15,11 +12,7 @@ class CardWidget extends StatelessWidget {
       child: InkWell(
         highlightColor: Colors.transparent,
         splashColor: Colors.white,
-        onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AddStudent(),
-            )),
+        onTap: () => homeBloc.add(HomeNavigateToAddEvent()),
         child: Column(
           children: [
             SvgPicture.asset(
