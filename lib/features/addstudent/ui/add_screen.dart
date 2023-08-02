@@ -112,21 +112,22 @@ class AddStudentPage extends StatelessWidget {
                               child: const Text("Pick Image From Gallery")),
                           const SizedBox(height: 20),
                           ElevatedButton(
-                              onPressed: () {
-                                addBloc.add(
-                                  AddClickedEvent(
-                                    name: nameEditingController.text,
-                                    address: addressEditingController.text,
-                                    age: int.parse(ageEditingController.text),
-                                    bloodgrp: bloodEditingController.text,
-                                    number:
-                                        int.parse(numberEditingController.text),
-                                    division: stdEditingController.text,
-                                    image: compressed,
-                                  ),
-                                );
-                              },
-                              child: const Text("add"))
+                            onPressed: () {
+                              addBloc.add(
+                                AddClickedEvent(
+                                  name: nameEditingController.text,
+                                  address: addressEditingController.text,
+                                  age: int.parse(ageEditingController.text),
+                                  bloodgrp: bloodEditingController.text,
+                                  number:
+                                      int.parse(numberEditingController.text),
+                                  division: stdEditingController.text,
+                                  image: compressed,
+                                ),
+                              );
+                            },
+                            child: const Text("add"),
+                          ),
                         ],
                       ),
                     ),

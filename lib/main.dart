@@ -6,20 +6,22 @@ import 'features/home/bloc/home_bloc.dart';
 import 'features/home/ui/home.dart';
 import 'features/studentlist/bloc/students_bloc.dart';
 
-void main() => runApp(MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => HomeBloc(),
-        ),
-        BlocProvider(
-          create: (context) => StudentsBloc(),
-        ),
-        BlocProvider(
-          create: (context) => DetailsBloc(),
-        )
-      ],
-      child: const MyApp(),
-    ));
+void main() => runApp(
+      MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => HomeBloc(),
+          ),
+          BlocProvider(
+            create: (context) => StudentsBloc(),
+          ),
+          BlocProvider(
+            create: (context) => DetailsBloc(),
+          )
+        ],
+        child: const MyApp(),
+      ),
+    );
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

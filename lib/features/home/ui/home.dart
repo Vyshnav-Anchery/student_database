@@ -18,8 +18,11 @@ class HomeScreen extends StatelessWidget {
         buildWhen: (previous, current) => current is! HomeActionState,
         listener: (context, state) {
           if (state is HomeNavigateToAddingPageActionState) {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AddStudentPage()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddStudentPage(),
+                ));
           } else if (state is HomeNavigateToStudentListPageActionState) {
             Navigator.push(
                 context,
@@ -31,10 +34,7 @@ class HomeScreen extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
               appBar: AppBar(),
-              drawer: Container(
-                color: Colors.white,
-                width: MediaQuery.sizeOf(context).width / 1.5,
-              ),
+              drawer: const Drawer(),
               body: SingleChildScrollView(
                 child: Center(
                   child: Column(

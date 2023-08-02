@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:student_database/features/addstudent/ui/add_screen.dart';
 
+import '../../details/ui/details.dart';
 import '../bloc/students_bloc.dart';
 
 class StudentsPage extends StatefulWidget {
@@ -27,15 +27,12 @@ class _StudentsPageState extends State<StudentsPage> {
       listenWhen: (previous, current) => current is StudentsActionState,
       buildWhen: (previous, current) => current is! StudentsActionState,
       listener: (context, state) {
-        switch (state.runtimeType) {
-          case NavigateToStudentsDetailsPageActionState:
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AddStudentPage(),
-                ));
-            break;
-          default:
+        if (state is NavigateToStudentsDetailsPageActionState) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => StudentDetails(index: state.index),
+              ));
         }
       },
       builder: (context, state) {
@@ -50,11 +47,6 @@ class _StudentsPageState extends State<StudentsPage> {
               appBar: AppBar(
                 title: const Text("Student List"),
                 actions: [
-                  IconButton(
-                      onPressed: () {
-                        studentsBloc.add(StudentButtonNavigateEvent());
-                      },
-                      icon: const Icon(Icons.details)),
                   IconButton(
                       onPressed: () {
                         studentsBloc.add(StudentButtonClearEvent());
@@ -73,12 +65,20 @@ class _StudentsPageState extends State<StudentsPage> {
                         )
                       : const Icon(
                           Icons.person_sharp); // Placeholder for no image
-
-                  return ListTile(
-                    leading: imageWidget,
-                    title: Text("${db[index]['name']}"),
-                    subtitle: Text("${db[index]['address']}"),
-                    trailing: Text("${db[index]['bloodgroup']}"),
+                  return Padding(
+                    padding:
+                        const EdgeInsets.only(top: 10, left: 10, right: 10),
+                    child: ListTile(
+                      onTap: () => studentsBloc
+                          .add(StudentButtonNavigateEvent(index: index)),
+                      tileColor: const Color.fromARGB(255, 213, 195, 244),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      leading: Hero(tag: "image", child: imageWidget),
+                      title: Text("${db[index]['name']}"),
+                      subtitle: Text("${db[index]['division']}"),
+                      trailing: const Icon(Icons.chevron_right_rounded),
+                    ),
                   );
                 },
               ));

@@ -18,6 +18,9 @@ class StudentsErrorState extends StudentsState {}
 
 class StudentAddedState extends StudentsState {}
 
-class NavigateToStudentsDetailsPageActionState extends StudentsActionState {}
+class NavigateToStudentsDetailsPageActionState extends StudentsActionState {
+  final int index;
+  NavigateToStudentsDetailsPageActionState({required this.index});
+}
 
 class NavigateToStudentsEditPageActionState extends StudentsActionState {}

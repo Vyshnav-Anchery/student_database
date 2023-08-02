@@ -6,7 +6,11 @@ class StudentsInitialEvent extends StudentsEvent {}
 
 class ViewStudentButtonClickedEvent extends StudentsEvent {}
 
-class StudentButtonNavigateEvent extends StudentsEvent {}
+class StudentButtonNavigateEvent extends StudentsEvent {
+  int index;
+
+  StudentButtonNavigateEvent({required this.index});
+}
 
 class StudentButtonClearEvent extends StudentsEvent {}
 

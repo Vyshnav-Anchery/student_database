@@ -19,7 +19,7 @@ class StudentsBloc extends Bloc<StudentsEvent, StudentsState> {
   Future<void> onStudentsInitialEvent(
       StudentsInitialEvent event, Emitter<StudentsState> emit) async {
     emit(StudentsLoadingState());
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     try {
       final dataList = await StudentDatabase.getAllStudents();
       emit(StudentsLoadedState(students: dataList));
@@ -30,7 +30,7 @@ class StudentsBloc extends Bloc<StudentsEvent, StudentsState> {
 
   FutureOr<void> studentButtonNavigateEvent(
       StudentButtonNavigateEvent event, Emitter<StudentsState> emit) {
-    emit(NavigateToStudentsDetailsPageActionState());
+    emit(NavigateToStudentsDetailsPageActionState(index: event.index));
   }
 
   FutureOr<void> studentButtonClearEvent(
