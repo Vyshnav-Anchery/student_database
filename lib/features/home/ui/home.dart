@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:student_database/features/home/bloc/home_bloc.dart';
 import 'package:student_database/features/studentlist/ui/students_screen.dart';
+import 'package:student_database/utils/constants/constants.dart';
 
 import '../../addstudent/ui/add_screen.dart';
 import 'widgets/cardmenu.dart';
@@ -34,7 +35,7 @@ class HomeScreen extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
               appBar: AppBar(),
-              drawer: const Drawer(),
+              // drawer: const Drawer(),
               body: SingleChildScrollView(
                 child: Center(
                   child: Column(
@@ -42,15 +43,15 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       CardWidget(
                         homeBloc: homeBloc,
-                        path: "assets/svg/addstudent.svg",
+                        path: Constants.addCardmenuImageLogo,
                         event: HomeNavigateToAddEvent(),
-                        buttonText: "Add Student",
+                        buttonText: Constants.addStudentString,
                       ),
                       CardWidget(
                         homeBloc: homeBloc,
                         event: HomeNavigateToStudentListEvent(),
-                        path: "assets/svg/viewstudent.svg",
-                        buttonText: "View Students",
+                        path: Constants.viewCardmenuImageLogo,
+                        buttonText: Constants.viewStudentString,
                       ),
                     ],
                   ),

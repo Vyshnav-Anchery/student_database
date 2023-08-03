@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:student_database/utils/constants/constants.dart';
 import 'package:student_database/utils/widgets/form.dart';
 
 import '../bloc/details_bloc.dart';
@@ -29,8 +30,8 @@ class _StudentDetailsState extends State<StudentDetails> {
         buildWhen: (previous, current) => current is! DetailsActionstate,
         listener: (context, state) {
           if (state is DetailsUpdatedState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Student Detail Updated')));
+            ScaffoldMessenger.of(context)
+                .showSnackBar(Constants.detailstudentSnackbar);
           } else if (state is DetailsDeletedState) {
             Navigator.pop(context);
           }
@@ -44,7 +45,7 @@ class _StudentDetailsState extends State<StudentDetails> {
             );
           } else if (state is DetailsLoadedState) {
             var db = state.students;
-            var img = db[widget.index]['image'];
+            var img = db[widget.index][Constants.imageString];
             return Scaffold(
               appBar: AppBar(
                 actions: [
@@ -53,13 +54,14 @@ class _StudentDetailsState extends State<StudentDetails> {
                         enabled = !enabled;
                         setState(() {});
                       },
-                      icon: const Icon(Icons.edit)),
+                      icon: Constants.editIcon),
                   IconButton(
-                      onPressed: () {
-                        detailsBloc
-                            .add(DeleteClickedEvent(index: db[widget.index]['id']));
-                      },
-                      icon: const Icon(Icons.delete))
+                    onPressed: () {
+                      detailsBloc.add(
+                          DeleteClickedEvent(index: db[widget.index][Constants.idString]));
+                    },
+                    icon: Constants.deleteIcon,
+                  )
                 ],
               ),
               body: SingleChildScrollView(
@@ -71,43 +73,39 @@ class _StudentDetailsState extends State<StudentDetails> {
                       children: [
                         Container(
                           width: double.infinity,
-                          height: 150,
-                          color: Colors.deepPurpleAccent,
+                          height: Constants.detailsContainerHeight,
+                          color: Constants.themeColor,
                         ),
                         Container(
-                          margin: const EdgeInsets.only(
-                              top: 100, left: 30, right: 30),
+                          margin: Constants.detailsPadding,
                           width: double.infinity,
                           child: CustomFormWidget(
                             bloc: detailsBloc,
-                            index: db[widget.index]['id'],
+                            index: db[widget.index][Constants.idString],
                             option: false,
                             enabled: enabled,
-                            name: db[widget.index]['name'],
-                            age: db[widget.index]['age'],
-                            address: db[widget.index]['address'],
-                            batch: db[widget.index]['division'],
-                            bloodgroup: db[widget.index]['bloodgroup'],
-                            contact: db[widget.index]['contact'],
-                            image: db[widget.index]['image'],
+                            name: db[widget.index][Constants.nameString],
+                            age: db[widget.index][Constants.ageString],
+                            address: db[widget.index][Constants.addressString],
+                            batch: db[widget.index][Constants.divisionString],
+                            bloodgroup: db[widget.index][Constants.bloodString],
+                            contact: db[widget.index][Constants.contactString],
+                            image: db[widget.index][Constants.imageString],
                           ),
                         ),
-                        const SizedBox(height: 30,)
+                        Constants.heightSized,
                       ],
                     ),
-                    const Positioned(
-                      top: 70,
-                      child: CircleAvatar(
-                        radius: 80,
-                        backgroundColor: Colors.white,
-                      ),
+                    Positioned(
+                      top: Constants.detailsContainerHeight / 2.1,
+                      child: Constants.detailsCircleAvatarBg,
                     ),
                     Positioned(
-                      top: 75,
+                      top: Constants.detailsContainerHeight / 2,
                       child: Hero(
-                        tag: "image",
+                        tag: Constants.imageHeroTag,
                         child: CircleAvatar(
-                          radius: 75,
+                          radius: Constants.detailsContainerHeight / 2,
                           backgroundImage: MemoryImage(img),
                         ),
                       ),

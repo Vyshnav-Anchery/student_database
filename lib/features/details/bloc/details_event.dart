@@ -14,6 +14,7 @@ class UpdateStudentEvent extends DetailsEvent {
   int age;
   String name;
   int index;
+  // ignore: prefer_typing_uninitialized_variables
   var image;
 
   UpdateStudentEvent({

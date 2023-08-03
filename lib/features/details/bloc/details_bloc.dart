@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:student_database/utils/constants/constants.dart';
 
 import '../../../data/student_database.dart';
 
@@ -29,13 +30,13 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
       UpdateStudentEvent event, Emitter<DetailsState> emit) async {
     try {
       final Map<String, dynamic> data = {
-        'name': event.name,
-        'age': event.age,
-        'contact': event.number,
-        'bloodgroup': event.address,
-        'address': event.address,
-        'division': event.division,
-        'image': event.image,
+        Constants.nameString: event.name,
+        Constants.ageString: event.age,
+        Constants.contactString: event.number,
+        Constants.bloodString: event.bloodgrp,
+        Constants.addressString: event.address,
+        Constants.divisionString: event.division,
+        Constants.imageString: event.image,
       };
       await StudentDatabase.updateData(event.index, data);
       print("emit");

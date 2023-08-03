@@ -11,7 +11,7 @@ class AddClickedEvent extends AddStudentEvent {
   String number;
   int age;
   String name;
-
+  // ignore: prefer_typing_uninitialized_variables
   var image;
 
   AddClickedEvent({

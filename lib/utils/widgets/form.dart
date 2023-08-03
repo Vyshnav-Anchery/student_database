@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:student_database/features/addstudent/bloc/add_student_bloc.dart';
+import 'package:student_database/utils/constants/constants.dart';
 
 import '../../features/details/bloc/details_bloc.dart';
 
@@ -62,55 +63,61 @@ class CustomFormWidget extends StatelessWidget {
           ),
           TextFormField(
             decoration: InputDecoration(
-                enabled: enabled,
-                border: const OutlineInputBorder(),
-                hintText: 'Enter name',
-                label: const Text("Name")),
+              enabled: enabled,
+              border: const OutlineInputBorder(),
+              hintText: Constants.nameHint,
+              label: Text(Constants.nameString),
+            ),
             controller: nameEditingController,
           ),
           const SizedBox(height: 20),
           TextFormField(
             decoration: InputDecoration(
-                enabled: enabled,
-                border: const OutlineInputBorder(),
-                hintText: 'Enter age',
-                label: const Text("Age")),
+              enabled: enabled,
+              border: const OutlineInputBorder(),
+              hintText: Constants.ageHint,
+              label: Text(Constants.ageString),
+            ),
             controller: ageEditingController,
           ),
           const SizedBox(height: 20),
           TextFormField(
             decoration: InputDecoration(
-                enabled: enabled,
-                border: const OutlineInputBorder(),
-                hintText: 'Enter phone number',
-                label: const Text("Contact")),
+              enabled: enabled,
+              border: const OutlineInputBorder(),
+              hintText: Constants.numberHint,
+              label: Text(Constants.contactString),
+            ),
             controller: numberEditingController,
           ),
           const SizedBox(height: 20),
           TextFormField(
             decoration: InputDecoration(
-                enabled: enabled,
-                border: const OutlineInputBorder(),
-                hintText: 'Enter address',
-                label: const Text("Address")),
+              enabled: enabled,
+              border: const OutlineInputBorder(),
+              hintText: Constants.addressHint,
+              label: Text(Constants.addressString),
+            ),
             controller: addressEditingController,
           ),
           const SizedBox(height: 20),
           TextFormField(
             decoration: InputDecoration(
-                enabled: enabled,
-                border: const OutlineInputBorder(),
-                hintText: 'Enter blood group',
-                label: const Text("Blood Group")),
+              enabled: enabled,
+              border: const OutlineInputBorder(),
+              hintText: Constants.bloodHint,
+              label: Text(Constants.bloodString),
+            ),
             controller: bloodEditingController,
           ),
           const SizedBox(height: 20),
           TextFormField(
             decoration: InputDecoration(
-                enabled: enabled,
-                border: const OutlineInputBorder(),
-                hintText: 'Enter batch',
-                label: const Text("Batch")),
+              enabled: enabled,
+              border: const OutlineInputBorder(),
+              hintText: Constants.divisionHint,
+              label: Text(Constants.divisionString),
+            ),
             controller: stdEditingController,
           ),
           const SizedBox(height: 20),
@@ -124,7 +131,7 @@ class CustomFormWidget extends StatelessWidget {
                   quality: 85,
                 );
               },
-              child: const Text("Pick Image From Gallery")),
+              child: Constants.imageButtonText),
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
@@ -151,7 +158,7 @@ class CustomFormWidget extends StatelessWidget {
                       ),
               );
             },
-            child: option ? const Text("Add") : const Text("Update"),
+            child: option ? Constants.addButtonText  : Constants.updateButtonText,
           ),
         ],
       ),

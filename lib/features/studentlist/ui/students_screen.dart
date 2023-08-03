@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:student_database/utils/constants/constants.dart';
 
 import '../../details/ui/details.dart';
 import '../bloc/students_bloc.dart';
@@ -45,38 +46,37 @@ class _StudentsPageState extends State<StudentsPage> {
         } else if (state is StudentsLoadedState) {
           return Scaffold(
               appBar: AppBar(
-                title: const Text("Student List"),
+                title: Constants.studentListTitle,
                 actions: [
                   IconButton(
                       onPressed: () {
                         studentsBloc.add(StudentButtonClearEvent());
                       },
-                      icon: const Icon(Icons.delete))
+                      icon: Constants.deleteIcon)
                 ],
               ),
               body: ListView.builder(
                 itemCount: state.students.length,
                 itemBuilder: (context, index) {
                   var db = state.students;
-                  var img = db[index]['image'];
+                  var img = db[index][Constants.imageString];
                   final imageWidget = img != null
                       ? CircleAvatar(
                           backgroundImage: MemoryImage(img),
                         )
-                      : const Icon(
-                          Icons.person_sharp); // Placeholder for no image
+                      : const Icon(Icons.person_sharp);
                   return Padding(
-                    padding:
-                        const EdgeInsets.only(top: 10, left: 10, right: 10),
+                    padding: Constants.paddingStudentsScreen,
                     child: ListTile(
                       onTap: () => studentsBloc
                           .add(StudentButtonNavigateEvent(index: index)),
-                      tileColor: const Color.fromARGB(255, 213, 195, 244),
+                      tileColor: Constants.tiileColor,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
-                      leading: Hero(tag: "image", child: imageWidget),
-                      title: Text("${db[index]['name']}"),
-                      subtitle: Text("${db[index]['division']}"),
+                      leading:
+                          Hero(tag: Constants.imageHeroTag, child: imageWidget),
+                      title: Text("${db[index][Constants.nameString]}"),
+                      subtitle: Text("${db[index][Constants.divisionString]}"),
                       trailing: const Icon(Icons.chevron_right_rounded),
                     ),
                   );
