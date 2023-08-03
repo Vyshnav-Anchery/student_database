@@ -10,6 +10,8 @@ part 'details_state.dart';
 class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
   DetailsBloc() : super(DetailsInitial()) {
     on<DetailsInitialEvent>(detailsInitialEvent);
+    on<UpdateStudentEvent>(updateStudentEvent);
+    on<DeleteClickedEvent>(deleteClickedEvent);
   }
 
   FutureOr<void> detailsInitialEvent(
@@ -21,5 +23,32 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     } catch (e) {
       emit(DetailsErrorState());
     }
+  }
+
+  FutureOr<void> updateStudentEvent(
+      UpdateStudentEvent event, Emitter<DetailsState> emit) async {
+    try {
+      final Map<String, dynamic> data = {
+        'name': event.name,
+        'age': event.age,
+        'contact': event.number,
+        'bloodgroup': event.address,
+        'address': event.address,
+        'division': event.division,
+        'image': event.image,
+      };
+      await StudentDatabase.updateData(event.index, data);
+      print("emit");
+      emit(DetailsUpdatedState());
+      print("after");
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  FutureOr<void> deleteClickedEvent(
+      DeleteClickedEvent event, Emitter<DetailsState> emit) async {
+    await StudentDatabase.deleteData(event.index);
+    emit(DetailsDeletedState());
   }
 }

@@ -16,7 +16,7 @@ class StudentDatabase {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT,
       age INTEGER,
-      contact REAL,
+      contact TEXT,
       bloodgroup TEXT,
       address TEXT,
       division TEXT,
@@ -27,7 +27,7 @@ class StudentDatabase {
   static Future<int> insertStudent({
     required String name,
     required int age,
-    required int contact,
+    required String contact,
     required String bloodgroup,
     required String address,
     required String division,

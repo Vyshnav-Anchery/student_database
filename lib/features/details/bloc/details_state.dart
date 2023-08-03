@@ -15,3 +15,7 @@ class DetailsLoadedState extends DetailsState {
 class DetailsErrorState extends DetailsState {}
 
 class DetailsActionstate extends DetailsState {}
+
+class DetailsUpdatedState extends DetailsActionstate {}
+
+class DetailsDeletedState extends DetailsActionstate {}

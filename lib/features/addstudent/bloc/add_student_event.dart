@@ -8,20 +8,21 @@ class AddClickedEvent extends AddStudentEvent {
   String division;
   String bloodgrp;
   String address;
-  int number;
+  String number;
   int age;
   String name;
 
   var image;
 
-  AddClickedEvent(
-      {required this.name,
-      required this.age,
-      required this.number,
-      required this.address,
-      required this.bloodgrp,
-      required this.division,
-      required this.image});
+  AddClickedEvent({
+    required this.name,
+    required this.age,
+    required this.number,
+    required this.address,
+    required this.bloodgrp,
+    required this.division,
+    required this.image,
+  });
 }
 
 class AddedEvent extends AddStudentEvent {}

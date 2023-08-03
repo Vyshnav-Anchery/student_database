@@ -1,9 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../data/student_database.dart';
-
 part 'add_student_event.dart';
 part 'add_student_state.dart';
 
@@ -18,11 +15,11 @@ class AddStudentBloc extends Bloc<AddStudentEvent, AddStudentState> {
       String name = event.name;
       int age = event.age;
       String bloodgroup = event.bloodgrp;
-      int contact = event.number;
+      String contact = event.number;
       String division = event.division;
       String address = event.address;
       var image = event.image;
-
+      // await StudentDatabase.updateData(id, data);
       await StudentDatabase.insertStudent(
           name: name,
           age: age,
