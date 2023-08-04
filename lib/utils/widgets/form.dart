@@ -8,7 +8,9 @@ import 'package:student_database/utils/constants/constants.dart';
 
 import '../../features/details/bloc/details_bloc.dart';
 
+// ignore: must_be_immutable
 class CustomFormWidget extends StatelessWidget {
+  
   var bloc;
   var image;
   bool option;

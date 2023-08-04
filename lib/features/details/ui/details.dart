@@ -32,8 +32,9 @@ class _StudentDetailsState extends State<StudentDetails> {
           if (state is DetailsUpdatedState) {
             ScaffoldMessenger.of(context)
                 .showSnackBar(Constants.detailstudentSnackbar);
-          } else if (state is DetailsDeletedState) {
-            Navigator.pop(context);
+          } else if (state is EditEnabledState) {
+            enabled = !enabled;
+            detailsBloc.add(DetailsInitialEvent());
           }
         },
         builder: (context, state) {
@@ -51,17 +52,9 @@ class _StudentDetailsState extends State<StudentDetails> {
                 actions: [
                   IconButton(
                       onPressed: () {
-                        enabled = !enabled;
-                        setState(() {});
+                        detailsBloc.add(EditClickedEvent());
                       },
                       icon: Constants.editIcon),
-                  IconButton(
-                    onPressed: () {
-                      detailsBloc.add(
-                          DeleteClickedEvent(index: db[widget.index][Constants.idString]));
-                    },
-                    icon: Constants.deleteIcon,
-                  )
                 ],
               ),
               body: SingleChildScrollView(

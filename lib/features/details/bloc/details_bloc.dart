@@ -4,15 +4,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:student_database/utils/constants/constants.dart';
 
 import '../../../data/student_database.dart';
+import '../../studentlist/bloc/students_bloc.dart';
 
 part 'details_event.dart';
 part 'details_state.dart';
 
 class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
+  final StudentsBloc studentsBloc = StudentsBloc();
   DetailsBloc() : super(DetailsInitial()) {
     on<DetailsInitialEvent>(detailsInitialEvent);
     on<UpdateStudentEvent>(updateStudentEvent);
-    on<DeleteClickedEvent>(deleteClickedEvent);
+    on<EditClickedEvent>(editClickedEvent);
   }
 
   FutureOr<void> detailsInitialEvent(
@@ -47,9 +49,8 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     }
   }
 
-  FutureOr<void> deleteClickedEvent(
-      DeleteClickedEvent event, Emitter<DetailsState> emit) async {
-    await StudentDatabase.deleteData(event.index);
-    emit(DetailsDeletedState());
+  FutureOr<void> editClickedEvent(
+      EditClickedEvent event, Emitter<DetailsState> emit) {
+    emit(EditEnabledState());
   }
 }

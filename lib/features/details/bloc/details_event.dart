@@ -29,8 +29,4 @@ class UpdateStudentEvent extends DetailsEvent {
   });
 }
 
-class DeleteClickedEvent extends DetailsEvent {
-  int index;
-
-  DeleteClickedEvent({required this.index});
-}
+class EditClickedEvent extends DetailsEvent {}

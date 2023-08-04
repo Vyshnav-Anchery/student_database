@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:go_router/go_router.dart';
 import 'package:student_database/utils/constants/constants.dart';
-
-import '../../details/ui/details.dart';
 import '../bloc/students_bloc.dart';
 
 class StudentsPage extends StatefulWidget {
@@ -20,7 +20,6 @@ class _StudentsPageState extends State<StudentsPage> {
   }
 
   final StudentsBloc studentsBloc = StudentsBloc();
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer(
@@ -29,11 +28,10 @@ class _StudentsPageState extends State<StudentsPage> {
       buildWhen: (previous, current) => current is! StudentsActionState,
       listener: (context, state) {
         if (state is NavigateToStudentsDetailsPageActionState) {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => StudentDetails(index: state.index),
-              ));
+          GoRouter.of(context).pushNamed(RoutingConstants.detailsRouteName,
+              pathParameters: {'index': state.index.toString()});
+        } else if (state is StudentDeletedActionState) {
+          studentsBloc.add(StudentsInitialEvent());
         }
       },
       builder: (context, state) {
@@ -65,19 +63,31 @@ class _StudentsPageState extends State<StudentsPage> {
                           backgroundImage: MemoryImage(img),
                         )
                       : const Icon(Icons.person_sharp);
-                  return Padding(
-                    padding: Constants.paddingStudentsScreen,
-                    child: ListTile(
-                      onTap: () => studentsBloc
-                          .add(StudentButtonNavigateEvent(index: index)),
-                      tileColor: Constants.tiileColor,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      leading:
-                          Hero(tag: Constants.imageHeroTag, child: imageWidget),
-                      title: Text("${db[index][Constants.nameString]}"),
-                      subtitle: Text("${db[index][Constants.divisionString]}"),
-                      trailing: const Icon(Icons.chevron_right_rounded),
+                  return Slidable(
+                    endActionPane:
+                        ActionPane(motion: const StretchMotion(), children: [
+                      SlidableAction(
+                        icon: Icons.delete,
+                        onPressed: (context) {
+                          studentsBloc
+                              .add(DeleteClickedEvent(index: db[index]['id']));
+                        },
+                      ),
+                    ]),
+                    child: Padding(
+                      padding: Constants.paddingStudentsScreen,
+                      child: ListTile(
+                        onTap: () => studentsBloc
+                            .add(StudentButtonNavigateEvent(index: index)),
+                        tileColor: Constants.tiileColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        leading: imageWidget,
+                        title: Text("${db[index][Constants.nameString]}"),
+                        subtitle:
+                            Text("${db[index][Constants.divisionString]}"),
+                        trailing: const Icon(Icons.chevron_right_rounded),
+                      ),
                     ),
                   );
                 },

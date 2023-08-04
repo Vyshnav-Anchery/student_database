@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:student_database/features/home/bloc/home_bloc.dart';
-import 'package:student_database/features/studentlist/ui/students_screen.dart';
 import 'package:student_database/utils/constants/constants.dart';
-
-import '../../addstudent/ui/add_screen.dart';
 import 'widgets/cardmenu.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -19,22 +17,15 @@ class HomeScreen extends StatelessWidget {
         buildWhen: (previous, current) => current is! HomeActionState,
         listener: (context, state) {
           if (state is HomeNavigateToAddingPageActionState) {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AddStudentPage(),
-                ));
+            GoRouter.of(context)
+                .pushNamed(RoutingConstants.addstudentsRouteName);
           } else if (state is HomeNavigateToStudentListPageActionState) {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const StudentsPage(),
-                ));
+            GoRouter.of(context).pushNamed(RoutingConstants.studentlistRouteName);
           }
         },
         builder: (context, state) {
           return Scaffold(
-              appBar: AppBar(),
+              appBar: AppBar(title: Constants.homeTitleString),
               // drawer: const Drawer(),
               body: SingleChildScrollView(
                 child: Center(

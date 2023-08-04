@@ -14,6 +14,8 @@ class StudentsBloc extends Bloc<StudentsEvent, StudentsState> {
     on<StudentButtonNavigateEvent>(studentButtonNavigateEvent);
 
     on<StudentButtonClearEvent>(studentButtonClearEvent);
+
+    on<DeleteClickedEvent>(deleteClickedEvent);
   }
 
   Future<void> onStudentsInitialEvent(
@@ -38,5 +40,11 @@ class StudentsBloc extends Bloc<StudentsEvent, StudentsState> {
     await StudentDatabase.clearDb();
     final dataList = await StudentDatabase.getAllStudents();
     emit(StudentsLoadedState(students: dataList));
+  }
+
+  FutureOr<void> deleteClickedEvent(
+      DeleteClickedEvent event, Emitter<StudentsState> emit) async {
+    await StudentDatabase.deleteData(event.index);
+    emit(StudentDeletedActionState());
   }
 }

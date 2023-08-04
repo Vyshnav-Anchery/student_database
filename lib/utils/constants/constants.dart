@@ -18,6 +18,17 @@ class Constants {
   static String imageString = 'image';
   static EdgeInsets cardPadding =
       const EdgeInsets.only(top: 20, left: 20, right: 20);
+  // ----------theme-----------------
+  static ThemeData appTheme = ThemeData(
+    colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurpleAccent),
+    primaryColor: Colors.deepPurpleAccent,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.deepPurpleAccent,
+      titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
+      iconTheme: IconThemeData(color: Colors.white),
+    ),
+    useMaterial3: true,
+  );
   // ------------addscreen---------------------------
   static Text addAppBarTitle = const Text("Add Students");
   static Text addFormTitle = Text("Enter details",
@@ -46,6 +57,7 @@ class Constants {
   static String viewCardmenuImageLogo = "assets/svg/viewstudent.svg";
   static String addStudentString = "Add Student";
   static String viewStudentString = "View Students";
+  static Text homeTitleString = const Text("Student App");
 // -----------studentsScreen------
   static EdgeInsets paddingStudentsScreen =
       const EdgeInsets.only(top: 10, left: 10, right: 10);
@@ -61,4 +73,18 @@ class Constants {
   static String numberHint = 'Enter phone number';
   static Text addButtonText = const Text("Add");
   static Text updateButtonText = const Text("Update");
+}
+
+class RoutingConstants {
+  static String homeRouteName = 'home';
+  static String homeRoutePath = '/';
+
+  static String addstudentsRouteName = 'addstudents';
+  static String addstudentsRoutePath = '/addstudents';
+
+  static String studentlistRouteName = 'studentlist';
+  static String studentlistRoutePath = '/studentlist';
+  
+  static String detailsRouteName = 'details';
+  static String detailsRoutePath = '/details';
 }

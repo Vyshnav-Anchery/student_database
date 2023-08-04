@@ -18,4 +18,4 @@ class DetailsActionstate extends DetailsState {}
 
 class DetailsUpdatedState extends DetailsActionstate {}
 
-class DetailsDeletedState extends DetailsActionstate {}
+class EditEnabledState extends DetailsActionstate {}

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:student_database/utils/constants/constants.dart';
 import 'features/details/bloc/details_bloc.dart';
 import 'features/home/bloc/home_bloc.dart';
-import 'features/home/ui/home.dart';
 import 'features/studentlist/bloc/students_bloc.dart';
+import 'utils/constants/routing.dart';
 
 void main() => runApp(
       MultiBlocProvider(
@@ -29,21 +29,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    AppRouter singleton = AppRouter.instance;
+    var router = singleton.router;
     return SafeArea(
-      child: MaterialApp(
+      child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurpleAccent),
-          primaryColor: Colors.deepPurpleAccent,
-          appBarTheme: const AppBarTheme(
-            backgroundColor: Colors.deepPurpleAccent,
-            titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
-            iconTheme: IconThemeData(color: Colors.white),
-          ),
-          useMaterial3: true,
-        ),
-        home: HomeScreen(),
+        theme: Constants.appTheme,
+        routerConfig: router,
       ),
     );
   }
