@@ -46,21 +46,9 @@ class StudentDatabase {
     return await db.insert('student', data);
   }
 
-  static Future<List<Map<String, dynamic>>> getData() async {
-    final db = await _openDb();
-    return await db.query('student');
-  }
-
   static Future<int> deleteData(int id) async {
     final db = await _openDb();
     return await db.delete('student', where: 'id=?', whereArgs: [id]);
-  }
-
-  static Future<Map<String, dynamic>?> getSingleData(int id) async {
-    final db = await _openDb();
-    List<Map<String, dynamic>> result =
-        await db.query('student', where: 'id=?', whereArgs: [id], limit: 1);
-    return result.isNotEmpty ? result.first : null;
   }
 
   static Future<int> updateData(int id, Map<String, dynamic> data) async {

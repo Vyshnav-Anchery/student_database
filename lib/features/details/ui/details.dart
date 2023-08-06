@@ -95,12 +95,9 @@ class _StudentDetailsState extends State<StudentDetails> {
                     ),
                     Positioned(
                       top: Constants.detailsContainerHeight / 2,
-                      child: Hero(
-                        tag: Constants.imageHeroTag,
-                        child: CircleAvatar(
-                          radius: Constants.detailsContainerHeight / 2,
-                          backgroundImage: MemoryImage(img),
-                        ),
+                      child: CircleAvatar(
+                        radius: Constants.detailsContainerHeight / 2,
+                        backgroundImage: MemoryImage(img),
                       ),
                     ),
                   ],

@@ -27,11 +27,6 @@ class AppRouter {
       path: RoutingConstants.studentlistRoutePath,
       pageBuilder: (context, state) => MaterialPage(child: StudentsPage()),
     ),
-    // GoRoute(
-    //   name: RoutingConstants.studentlistRouteName,
-    //   path: RoutingConstants.addstudentsRoutePath,
-    //   pageBuilder: (context, state) =>  MaterialPage(child: StudentsPage()),
-    // ),
     GoRoute(
       name: RoutingConstants.detailsRouteName,
       path: '${RoutingConstants.detailsRoutePath}/:index',

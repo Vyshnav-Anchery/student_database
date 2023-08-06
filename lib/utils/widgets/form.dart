@@ -5,12 +5,10 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:student_database/features/addstudent/bloc/add_student_bloc.dart';
 import 'package:student_database/utils/constants/constants.dart';
-
 import '../../features/details/bloc/details_bloc.dart';
 
 // ignore: must_be_immutable
 class CustomFormWidget extends StatelessWidget {
-  
   var bloc;
   var image;
   bool option;
@@ -48,7 +46,7 @@ class CustomFormWidget extends StatelessWidget {
   var myfile;
   late Uint8List imagebytes;
   var compressed;
-
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     nameEditingController.text = name ?? "";
@@ -58,6 +56,7 @@ class CustomFormWidget extends StatelessWidget {
     bloodEditingController.text = bloodgroup ?? "";
     stdEditingController.text = batch ?? "";
     return Form(
+      key: _formKey,
       child: Column(
         children: [
           const SizedBox(
@@ -74,6 +73,8 @@ class CustomFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           TextFormField(
+            maxLength: 2,
+            keyboardType: TextInputType.number,
             decoration: InputDecoration(
               enabled: enabled,
               border: const OutlineInputBorder(),
@@ -84,6 +85,8 @@ class CustomFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           TextFormField(
+            maxLength: 10,
+            keyboardType: TextInputType.number,
             decoration: InputDecoration(
               enabled: enabled,
               border: const OutlineInputBorder(),
@@ -124,46 +127,48 @@ class CustomFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-              onPressed: () async {
-                myfile =
-                    await ImagePicker().pickImage(source: ImageSource.gallery);
-                imagebytes = await myfile!.readAsBytes();
-                compressed = await FlutterImageCompress.compressWithList(
-                  imagebytes,
-                  quality: 85,
-                );
-              },
-              child: Constants.imageButtonText),
+              onPressed: imagePick, child: Constants.imageButtonText),
           const SizedBox(height: 20),
           ElevatedButton(
-            onPressed: () {
-              bloc.add(
-                option
-                    ? AddClickedEvent(
-                        name: nameEditingController.text,
-                        address: addressEditingController.text,
-                        age: int.parse(ageEditingController.text),
-                        bloodgrp: bloodEditingController.text,
-                        number: numberEditingController.text,
-                        division: stdEditingController.text,
-                        image: compressed,
-                      )
-                    : UpdateStudentEvent(
-                        index: index!,
-                        name: nameEditingController.text,
-                        address: addressEditingController.text,
-                        age: int.parse(ageEditingController.text),
-                        bloodgrp: bloodEditingController.text,
-                        number: numberEditingController.text,
-                        division: stdEditingController.text,
-                        image: compressed ?? image,
-                      ),
-              );
-            },
-            child: option ? Constants.addButtonText  : Constants.updateButtonText,
+            onPressed: option ? add : update,
+            child:
+                option ? Constants.addButtonText : Constants.updateButtonText,
           ),
         ],
       ),
     );
+  }
+
+  add() {
+    bloc.add(AddClickedEvent(
+      name: nameEditingController.text,
+      address: addressEditingController.text,
+      age: int.parse(ageEditingController.text),
+      bloodgrp: bloodEditingController.text,
+      number: numberEditingController.text,
+      division: stdEditingController.text,
+      image: compressed,
+    ));
+    _formKey.currentState!.reset();
+  }
+
+  update() {
+    bloc.add(UpdateStudentEvent(
+      index: index!,
+      name: nameEditingController.text,
+      address: addressEditingController.text,
+      age: int.parse(ageEditingController.text),
+      bloodgrp: bloodEditingController.text,
+      number: numberEditingController.text,
+      division: stdEditingController.text,
+      image: compressed ?? image,
+    ));
+  }
+
+  imagePick() async {
+    myfile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    imagebytes = await myfile!.readAsBytes();
+    compressed =
+        await FlutterImageCompress.compressWithList(imagebytes, quality: 85);
   }
 }

@@ -41,9 +41,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
         Constants.imageString: event.image,
       };
       await StudentDatabase.updateData(event.index, data);
-      print("emit");
       emit(DetailsUpdatedState());
-      print("after");
     } catch (e) {
       print(e);
     }
