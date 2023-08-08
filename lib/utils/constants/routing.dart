@@ -25,7 +25,7 @@ class AppRouter {
     GoRoute(
       name: RoutingConstants.studentlistRouteName,
       path: RoutingConstants.studentlistRoutePath,
-      pageBuilder: (context, state) => MaterialPage(child: StudentsPage()),
+      pageBuilder: (context, state) => const MaterialPage(child: StudentsPage()),
     ),
     GoRoute(
       name: RoutingConstants.detailsRouteName,
