@@ -4,6 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:student_database/utils/constants/constants.dart';
+import 'package:student_database/utils/widgets/drawer.dart';
 import '../bloc/students_bloc.dart';
 
 class StudentsPage extends StatefulWidget {
@@ -55,6 +56,7 @@ class _StudentsPageState extends State<StudentsPage> {
                   )
                 ],
               ),
+              drawer: const DrawerWidget(),
               body: LiquidPullToRefresh(
                 color: Colors.transparent,
                 onRefresh: () async => studentsBloc.add(StudentsInitialEvent()),

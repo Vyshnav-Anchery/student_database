@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:student_database/utils/constants/constants.dart';
+import 'package:student_database/utils/widgets/drawer.dart';
 import 'package:student_database/utils/widgets/form.dart';
 
 import '../bloc/add_student_bloc.dart';
@@ -23,6 +24,7 @@ class AddStudentPage extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(title: Constants.addAppBarTitle),
+            drawer: const DrawerWidget(),
             body: SingleChildScrollView(
               child: Container(
                 margin: Constants.addStudentPadding,

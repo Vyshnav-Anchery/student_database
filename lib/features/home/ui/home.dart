@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -22,12 +21,13 @@ class HomeScreen extends StatelessWidget {
             GoRouter.of(context)
                 .pushNamed(RoutingConstants.addstudentsRouteName);
           } else if (state is HomeNavigateToStudentListPageActionState) {
-            GoRouter.of(context).pushNamed(RoutingConstants.studentlistRouteName);
+            GoRouter.of(context)
+                .pushNamed(RoutingConstants.studentlistRouteName);
           }
         },
         builder: (context, state) {
           return Scaffold(
-            drawer: DrawerWidget(),
+              drawer: DrawerWidget(),
               appBar: AppBar(title: Constants.homeTitleString),
               // drawer: const Drawer(),
               body: SingleChildScrollView(
