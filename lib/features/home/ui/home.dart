@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:student_database/features/home/bloc/home_bloc.dart';
 import 'package:student_database/utils/constants/constants.dart';
+import '../../../utils/widgets/drawer.dart';
 import 'widgets/cardmenu.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -25,6 +27,7 @@ class HomeScreen extends StatelessWidget {
         },
         builder: (context, state) {
           return Scaffold(
+            drawer: DrawerWidget(),
               appBar: AppBar(title: Constants.homeTitleString),
               // drawer: const Drawer(),
               body: SingleChildScrollView(

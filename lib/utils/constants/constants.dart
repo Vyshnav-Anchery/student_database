@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class Constants {
   static MaterialAccentColor themeColor = Colors.deepPurpleAccent;
@@ -29,6 +30,8 @@ class Constants {
     ),
     useMaterial3: true,
   );
+  // -------------Login-----------------------------
+  static Icon googleIcon = const Icon(EvaIcons.google, color: Colors.red);
   // ------------addscreen---------------------------
   static Text addAppBarTitle = const Text("Add Students");
   static Text addFormTitle = Text("Enter details",
@@ -65,6 +68,7 @@ class Constants {
   static Text studentListTitle = const Text("Student List");
 // -----------form----------
   static Text imageButtonText = const Text("Pick Image From Gallery");
+  static Text locationButtonText = const Text("Pick Location");
   static String nameHint = 'Enter name';
   static String ageHint = 'Enter age';
   static String addressHint = 'Enter address';
@@ -76,15 +80,21 @@ class Constants {
 }
 
 class RoutingConstants {
+  static String splashRouteName = 'splash';
+  static String splashRoutePath = '/';
+
+  static String loginRouteName = 'login';
+  static String loginRoutePath = '/login';
+
   static String homeRouteName = 'home';
-  static String homeRoutePath = '/';
+  static String homeRoutePath = '/home';
 
   static String addstudentsRouteName = 'addstudents';
   static String addstudentsRoutePath = '/addstudents';
 
   static String studentlistRouteName = 'studentlist';
   static String studentlistRoutePath = '/studentlist';
-  
+
   static String detailsRouteName = 'details';
   static String detailsRoutePath = '/details';
 }

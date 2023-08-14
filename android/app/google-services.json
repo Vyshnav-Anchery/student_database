@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "781659153964",
+    "project_id": "studentdbtask",
+    "storage_bucket": "studentdbtask.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781659153964:android:f05e6e1b0a1d4ddbca1389",
+        "android_client_info": {
+          "package_name": "com.example.student_database"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781659153964-ls4r6pcar8luuld38a2e32286i03q7i3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE6KBUg6hhLi_loxzijPd5EzysqlkYwiI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781659153964-ls4r6pcar8luuld38a2e32286i03q7i3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -46,6 +46,12 @@ dependencies:
   flutter_slidable: ^3.0.0
   liquid_pull_to_refresh: ^3.0.1
   flutter_local_notifications: ^15.1.0+1
+  geolocator: ^9.0.2
+  icons_plus: ^4.0.0
+  firebase_core: ^2.15.0
+  firebase_auth: ^4.7.2
+  google_sign_in: ^6.1.4
+  shared_preferences: ^2.2.0
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +79,7 @@ flutter:
   assets:
     - assets/svg/addstudent.svg
     - assets/svg/viewstudent.svg
+    - assets/images/login.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

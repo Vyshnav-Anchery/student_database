@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:student_database/features/addstudent/bloc/add_student_bloc.dart';
 import 'package:student_database/utils/constants/constants.dart';
@@ -129,6 +130,11 @@ class CustomFormWidget extends StatelessWidget {
           ElevatedButton(
               onPressed: imagePick, child: Constants.imageButtonText),
           const SizedBox(height: 20),
+          option
+              ? ElevatedButton(
+                  onPressed: locationpick, child: Constants.locationButtonText)
+              : const SizedBox(),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: option ? add : update,
             child:
@@ -170,5 +176,23 @@ class CustomFormWidget extends StatelessWidget {
     imagebytes = await myfile!.readAsBytes();
     compressed =
         await FlutterImageCompress.compressWithList(imagebytes, quality: 85);
+  }
+
+  locationpick() async {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error("Location services are disabled");
+    }
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error("Location Permission Denied");
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error("Location Permission Are Permenantly Denied");
+    }
+    return await Geolocator.getCurrentPosition();
   }
 }
