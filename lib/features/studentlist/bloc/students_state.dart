@@ -26,3 +26,5 @@ class NavigateToStudentsDetailsPageActionState extends StudentsActionState {
 class NavigateToStudentsEditPageActionState extends StudentsActionState {}
 
 class StudentDeletedActionState extends StudentsActionState {}
+
+class StudentUpdatedActionState extends StudentsActionState {}

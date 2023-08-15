@@ -11,6 +11,8 @@ class AddClickedEvent extends AddStudentEvent {
   String number;
   int age;
   String name;
+  String latitude;
+  String longitude;
   // ignore: prefer_typing_uninitialized_variables
   var image;
 
@@ -22,6 +24,8 @@ class AddClickedEvent extends AddStudentEvent {
     required this.bloodgrp,
     required this.division,
     required this.image,
+    required this.latitude,
+    required this.longitude,
   });
 }
 

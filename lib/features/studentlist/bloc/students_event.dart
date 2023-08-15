@@ -13,12 +13,12 @@ class StudentButtonNavigateEvent extends StudentsEvent {
 }
 
 class StudentButtonClearEvent extends StudentsEvent {}
+class StudentUpdatedEvent extends StudentsEvent {}
 
 class EditStudentButtonClickedEvent extends StudentsEvent {}
 
 class DeleteClickedEvent extends StudentsEvent {
   var index;
-
 
   DeleteClickedEvent({required this.index});
 }

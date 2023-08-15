@@ -19,15 +19,20 @@ class AddStudentBloc extends Bloc<AddStudentEvent, AddStudentState> {
       String division = event.division;
       String address = event.address;
       var image = event.image;
+      String latitude=event.latitude;
+      String longitude=event.longitude;
       // await StudentDatabase.updateData(id, data);
       await StudentDatabase.insertStudent(
-          name: name,
-          age: age,
-          bloodgroup: bloodgroup,
-          contact: contact,
-          division: division,
-          address: address,
-          imageBytes: image);
+        name: name,
+        age: age,
+        bloodgroup: bloodgroup,
+        contact: contact,
+        division: division,
+        address: address,
+        imageBytes: image,
+        latitude: latitude,
+        longitude: longitude,
+      );
       emit(AddStudentAddedState());
     } catch (e) {
       emit(AddStudentErrorState());

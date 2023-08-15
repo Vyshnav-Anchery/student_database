@@ -22,6 +22,8 @@ class CustomFormWidget extends StatelessWidget {
   String? bloodgroup;
   String? batch;
   int? index;
+  String? latitude;
+  String? longitude;
 
   CustomFormWidget({
     super.key,
@@ -36,6 +38,8 @@ class CustomFormWidget extends StatelessWidget {
     this.batch,
     this.index,
     this.image,
+    this.latitude,
+    this.longitude,
   });
 
   final TextEditingController nameEditingController = TextEditingController();
@@ -45,11 +49,15 @@ class CustomFormWidget extends StatelessWidget {
       TextEditingController();
   final TextEditingController bloodEditingController = TextEditingController();
   final TextEditingController stdEditingController = TextEditingController();
+  final TextEditingController locationController = TextEditingController();
   var myfile;
   late Uint8List imagebytes;
   var compressed;
   String? imageName;
+   Position? location;
+
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     nameEditingController.text = name ?? "";
@@ -58,6 +66,7 @@ class CustomFormWidget extends StatelessWidget {
     addressEditingController.text = address ?? "";
     bloodEditingController.text = bloodgroup ?? "";
     stdEditingController.text = batch ?? "";
+    locationController.text=latitude.toString();
     return Form(
       key: _formKey,
       child: Column(
@@ -129,6 +138,16 @@ class CustomFormWidget extends StatelessWidget {
             controller: stdEditingController,
           ),
           const SizedBox(height: 20),
+          enabled ?TextFormField(
+            decoration: InputDecoration(
+              enabled: enabled,
+              border: const OutlineInputBorder(),
+              hintText: Constants.divisionHint,
+              label: Text(Constants.divisionString),
+            ),
+            controller: locationController,
+          ):SizedBox(),
+          const SizedBox(height: 20),
           enabled ? ElevatedButton(
               onPressed: imagePick, child: Constants.imageButtonText):SizedBox(),
           const SizedBox(height: 20),
@@ -156,6 +175,8 @@ class CustomFormWidget extends StatelessWidget {
       number: numberEditingController.text,
       division: stdEditingController.text,
       image: compressed,
+      latitude: location!.latitude.toString(),
+      longitude: location!.longitude.toString(),
     ));
     _formKey.currentState!.reset();
   }
@@ -170,6 +191,7 @@ class CustomFormWidget extends StatelessWidget {
       number: numberEditingController.text,
       division: stdEditingController.text,
       image: compressed ?? image,
+
     ));
   }
 
@@ -197,9 +219,6 @@ class CustomFormWidget extends StatelessWidget {
     if (permission == LocationPermission.deniedForever) {
       return Future.error("Location Permission Are Permenantly Denied");
     }
-    var a = await Geolocator.getCurrentPosition();
-    log(a.latitude.toString());
-    log(a.longitude.toString());
-    return await Geolocator.getCurrentPosition();
+     location = await Geolocator.getCurrentPosition();
   }
 }

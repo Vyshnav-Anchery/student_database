@@ -20,7 +20,9 @@ class StudentDatabase {
       bloodgroup TEXT,
       address TEXT,
       division TEXT,
-      image TEXT
+      image TEXT,
+      latitude TEXT,
+      longitude TEXT
       )''');
   }
 
@@ -31,6 +33,8 @@ class StudentDatabase {
     required String bloodgroup,
     required String address,
     required String division,
+    required String latitude,
+    required String longitude,
     required Uint8List imageBytes,
   }) async {
     final db = await _openDb();
@@ -42,6 +46,8 @@ class StudentDatabase {
       'address': address,
       'division': division,
       'image': imageBytes,
+      'latitude':latitude,
+      'longitude':longitude
     };
     return await db.insert('student', data);
   }

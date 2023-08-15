@@ -33,6 +33,8 @@ class _StudentsPageState extends State<StudentsPage> {
               pathParameters: {'index': state.index.toString()});
         } else if (state is StudentDeletedActionState) {
           studentsBloc.add(StudentsInitialEvent());
+        } else if (state is StudentUpdatedActionState) {
+          studentsBloc.add(StudentsInitialEvent());
         }
       },
       builder: (context, state) {

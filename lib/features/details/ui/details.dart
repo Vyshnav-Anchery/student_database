@@ -85,6 +85,8 @@ class _StudentDetailsState extends State<StudentDetails> {
                             bloodgroup: db[widget.index][Constants.bloodString],
                             contact: db[widget.index][Constants.contactString],
                             image: db[widget.index][Constants.imageString],
+                            latitude: db[widget.index]['latitude'],
+                            longitude: db[widget.index]['longitude'],
                           ),
                         ),
                         Constants.heightSized,
