@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -47,6 +48,7 @@ class CustomFormWidget extends StatelessWidget {
   var myfile;
   late Uint8List imagebytes;
   var compressed;
+  String? imageName;
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -127,8 +129,8 @@ class CustomFormWidget extends StatelessWidget {
             controller: stdEditingController,
           ),
           const SizedBox(height: 20),
-          ElevatedButton(
-              onPressed: imagePick, child: Constants.imageButtonText),
+          enabled ? ElevatedButton(
+              onPressed: imagePick, child: Constants.imageButtonText):SizedBox(),
           const SizedBox(height: 20),
           option
               ? ElevatedButton(
@@ -173,6 +175,8 @@ class CustomFormWidget extends StatelessWidget {
 
   imagePick() async {
     myfile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    String imagePath = myfile.path;
+    imageName = imagePath.split('/').last;
     imagebytes = await myfile!.readAsBytes();
     compressed =
         await FlutterImageCompress.compressWithList(imagebytes, quality: 85);
@@ -193,6 +197,9 @@ class CustomFormWidget extends StatelessWidget {
     if (permission == LocationPermission.deniedForever) {
       return Future.error("Location Permission Are Permenantly Denied");
     }
+    var a = await Geolocator.getCurrentPosition();
+    log(a.latitude.toString());
+    log(a.longitude.toString());
     return await Geolocator.getCurrentPosition();
   }
 }

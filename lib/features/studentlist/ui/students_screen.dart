@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
-import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:student_database/utils/constants/constants.dart';
 import 'package:student_database/utils/widgets/drawer.dart';
 import '../bloc/students_bloc.dart';
@@ -34,7 +33,6 @@ class _StudentsPageState extends State<StudentsPage> {
               pathParameters: {'index': state.index.toString()});
         } else if (state is StudentDeletedActionState) {
           studentsBloc.add(StudentsInitialEvent());
-          GoRouter.of(context).pop(true);
         }
       },
       builder: (context, state) {
@@ -57,13 +55,12 @@ class _StudentsPageState extends State<StudentsPage> {
                 ],
               ),
               drawer: const DrawerWidget(),
-              body: LiquidPullToRefresh(
-                color: Colors.transparent,
+              body: RefreshIndicator(
                 onRefresh: () async => studentsBloc.add(StudentsInitialEvent()),
                 child: ListView.builder(
                   itemCount: state.students.length,
                   itemBuilder: (context, index) {
-                    var db = state.students;
+                    List<Map<String, dynamic>> db = state.students;
                     var img = db[index][Constants.imageString];
                     final imageWidget = img != null
                         ? CircleAvatar(

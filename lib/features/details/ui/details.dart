@@ -32,6 +32,7 @@ class _StudentDetailsState extends State<StudentDetails> {
           if (state is DetailsUpdatedState) {
             ScaffoldMessenger.of(context)
                 .showSnackBar(Constants.detailstudentSnackbar);
+            detailsBloc.add(DetailsInitialEvent());
           } else if (state is EditEnabledState) {
             enabled = !enabled;
             detailsBloc.add(DetailsInitialEvent());

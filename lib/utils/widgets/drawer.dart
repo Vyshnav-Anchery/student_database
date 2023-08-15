@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -13,7 +11,6 @@ class DrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String currentRoute = GoRouterState.of(context).name!;
-    log(currentRoute);
     return Drawer(
         child: Column(
       children: [
@@ -40,8 +37,9 @@ class DrawerWidget extends StatelessWidget {
           onTap: () => GoRouter.of(context)
               .pushNamed(RoutingConstants.addstudentsRouteName),
           child: ListTile(
-            selected:
-                currentRoute == RoutingConstants.addstudentsRouteName ? true : false,
+            selected: currentRoute == RoutingConstants.addstudentsRouteName
+                ? true
+                : false,
             leading: Icon(Icons.addchart),
             title: Text("Add Students"),
           ),
@@ -49,16 +47,20 @@ class DrawerWidget extends StatelessWidget {
         InkWell(
           onTap: () => GoRouter.of(context)
               .pushNamed(RoutingConstants.studentlistRouteName),
-          child:  ListTile(
-            selected:
-                currentRoute == RoutingConstants.studentlistRouteName ? true : false,
+          child: ListTile(
+            selected: currentRoute == RoutingConstants.studentlistRouteName
+                ? true
+                : false,
             leading: Icon(Icons.table_view),
             title: Text("View Students"),
           ),
         ),
         const Spacer(),
         TextButton(
-          onPressed: () => FirebaseAuth.instance.signOut(),
+          onPressed: () {
+            FirebaseAuth.instance.signOut();
+            GoRouter.of(context).pushReplacementNamed(RoutingConstants.loginRouteName);
+          },
           child: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
