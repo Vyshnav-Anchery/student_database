@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -54,7 +53,7 @@ class CustomFormWidget extends StatelessWidget {
   late Uint8List imagebytes;
   var compressed;
   String? imageName;
-   Position? location;
+  Position? location;
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -66,14 +65,12 @@ class CustomFormWidget extends StatelessWidget {
     addressEditingController.text = address ?? "";
     bloodEditingController.text = bloodgroup ?? "";
     stdEditingController.text = batch ?? "";
-    locationController.text=latitude.toString();
+    locationController.text = latitude.toString();
     return Form(
       key: _formKey,
       child: Column(
         children: [
-          const SizedBox(
-            height: 20,
-          ),
+          Constants.formSized,
           TextFormField(
             decoration: InputDecoration(
               enabled: enabled,
@@ -83,7 +80,7 @@ class CustomFormWidget extends StatelessWidget {
             ),
             controller: nameEditingController,
           ),
-          const SizedBox(height: 20),
+          Constants.formSized,
           TextFormField(
             maxLength: 2,
             keyboardType: TextInputType.number,
@@ -95,7 +92,7 @@ class CustomFormWidget extends StatelessWidget {
             ),
             controller: ageEditingController,
           ),
-          const SizedBox(height: 20),
+          Constants.formSized,
           TextFormField(
             maxLength: 10,
             keyboardType: TextInputType.number,
@@ -107,7 +104,7 @@ class CustomFormWidget extends StatelessWidget {
             ),
             controller: numberEditingController,
           ),
-          const SizedBox(height: 20),
+          Constants.formSized,
           TextFormField(
             decoration: InputDecoration(
               enabled: enabled,
@@ -117,7 +114,7 @@ class CustomFormWidget extends StatelessWidget {
             ),
             controller: addressEditingController,
           ),
-          const SizedBox(height: 20),
+          Constants.formSized,
           TextFormField(
             decoration: InputDecoration(
               enabled: enabled,
@@ -127,7 +124,7 @@ class CustomFormWidget extends StatelessWidget {
             ),
             controller: bloodEditingController,
           ),
-          const SizedBox(height: 20),
+          Constants.formSized,
           TextFormField(
             decoration: InputDecoration(
               enabled: enabled,
@@ -137,30 +134,41 @@ class CustomFormWidget extends StatelessWidget {
             ),
             controller: stdEditingController,
           ),
-          const SizedBox(height: 20),
-          enabled ?TextFormField(
-            decoration: InputDecoration(
-              enabled: enabled,
-              border: const OutlineInputBorder(),
-              hintText: Constants.divisionHint,
-              label: Text(Constants.divisionString),
-            ),
-            controller: locationController,
-          ):SizedBox(),
-          const SizedBox(height: 20),
-          enabled ? ElevatedButton(
-              onPressed: imagePick, child: Constants.imageButtonText):SizedBox(),
-          const SizedBox(height: 20),
-          option
-              ? ElevatedButton(
-                  onPressed: locationpick, child: Constants.locationButtonText)
+          Constants.formSized,
+          !option
+              ? TextFormField(
+                  decoration: InputDecoration(
+                    enabled: enabled,
+                    border: const OutlineInputBorder(),
+                    hintText: Constants.divisionHint,
+                    label: Text(Constants.locationString),
+                  ),
+                  controller: locationController,
+                )
               : const SizedBox(),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: option ? add : update,
-            child:
-                option ? Constants.addButtonText : Constants.updateButtonText,
-          ),
+          Constants.formSized,
+          enabled
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                        onPressed: imagePick, child: Constants.imageButtonIcon),
+                    ElevatedButton(
+                        onPressed: locationpick,
+                        child: Constants.locationButtonIcon),
+                  ],
+                )
+              : const SizedBox(),
+          Constants.formSized,
+          enabled
+              ? ElevatedButton(
+                  onPressed: option ? add : update,
+                  child: option
+                      ? Constants.addButtonText
+                      : Constants.updateButtonText,
+                )
+              : const SizedBox(),
+          Constants.formSized,
         ],
       ),
     );
@@ -191,7 +199,6 @@ class CustomFormWidget extends StatelessWidget {
       number: numberEditingController.text,
       division: stdEditingController.text,
       image: compressed ?? image,
-
     ));
   }
 
@@ -219,6 +226,6 @@ class CustomFormWidget extends StatelessWidget {
     if (permission == LocationPermission.deniedForever) {
       return Future.error("Location Permission Are Permenantly Denied");
     }
-     location = await Geolocator.getCurrentPosition();
+    location = await Geolocator.getCurrentPosition();
   }
 }

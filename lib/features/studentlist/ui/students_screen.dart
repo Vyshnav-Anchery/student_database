@@ -27,10 +27,10 @@ class _StudentsPageState extends State<StudentsPage> {
       bloc: studentsBloc,
       listenWhen: (previous, current) => current is StudentsActionState,
       buildWhen: (previous, current) => current is! StudentsActionState,
-      listener: (context, state) {
+      listener: (context, state) async{
         if (state is NavigateToStudentsDetailsPageActionState) {
           GoRouter.of(context).pushNamed(RoutingConstants.detailsRouteName,
-              pathParameters: {'index': state.index.toString()});
+              pathParameters: {'index': state.index.toString()}).whenComplete(() => studentsBloc.add(StudentsInitialEvent()));
         } else if (state is StudentDeletedActionState) {
           studentsBloc.add(StudentsInitialEvent());
         } else if (state is StudentUpdatedActionState) {

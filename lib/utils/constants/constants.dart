@@ -9,11 +9,13 @@ class Constants {
   static Icon editIcon = const Icon(Icons.edit);
   static SizedBox heightSized = const SizedBox(height: 30);
   static SizedBox widthtSized = const SizedBox(width: 5);
+  static SizedBox formSized = const SizedBox(height: 20);
   static String idString = 'id';
   static String nameString = 'name';
   static String ageString = 'age';
   static String addressString = 'address';
   static String divisionString = 'division';
+  static String locationString = 'location';
   static String bloodString = 'bloodgroup';
   static String contactString = 'contact';
   static String imageString = 'image';
@@ -67,15 +69,15 @@ class Constants {
   static Color tiileColor = const Color.fromARGB(255, 213, 195, 244);
   static Text studentListTitle = const Text("Student List");
 // -----------form----------
-  static Text imageButtonText = const Text("Pick Image From Gallery");
-  static Text locationButtonText = const Text("Pick Location");
+  static Icon imageButtonIcon = const Icon(Icons.add_photo_alternate_rounded);
+  static Icon locationButtonIcon = const Icon(Icons.add_location_alt);
   static String nameHint = 'Enter name';
   static String ageHint = 'Enter age';
   static String addressHint = 'Enter address';
   static String divisionHint = 'Enter batch';
   static String bloodHint = 'Enter blood group';
   static String numberHint = 'Enter phone number';
-  static Text addButtonText = const Text("Add");
+  static Text addButtonText = const Text("Add to Database");
   static Text updateButtonText = const Text("Update");
 }
 
