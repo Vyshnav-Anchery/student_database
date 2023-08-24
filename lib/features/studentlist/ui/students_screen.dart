@@ -18,6 +18,7 @@ class _StudentsPageState extends State<StudentsPage> {
   void initState() {
     super.initState();
     studentsBloc.add(StudentsInitialEvent());
+    // studentsBloc=BlocProvider.of<StudentsBloc>(context);
   }
 
   final StudentsBloc studentsBloc = StudentsBloc();
@@ -27,14 +28,15 @@ class _StudentsPageState extends State<StudentsPage> {
       bloc: studentsBloc,
       listenWhen: (previous, current) => current is StudentsActionState,
       buildWhen: (previous, current) => current is! StudentsActionState,
-      listener: (context, state) async{
+      listener: (context, state) async {
         if (state is NavigateToStudentsDetailsPageActionState) {
           GoRouter.of(context).pushNamed(RoutingConstants.detailsRouteName,
-              pathParameters: {'index': state.index.toString()}).whenComplete(() => studentsBloc.add(StudentsInitialEvent()));
+              pathParameters: {
+                'index': state.index.toString()
+              }).whenComplete(() => studentsBloc.add(StudentsInitialEvent()));
         } else if (state is StudentDeletedActionState) {
           studentsBloc.add(StudentsInitialEvent());
-        } else if (state is StudentUpdatedActionState) {
-          studentsBloc.add(StudentsInitialEvent());
+          Navigator.pop(context,);
         }
       },
       builder: (context, state) {

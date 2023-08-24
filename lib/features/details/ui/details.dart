@@ -47,7 +47,7 @@ class _StudentDetailsState extends State<StudentDetails> {
             );
           } else if (state is DetailsLoadedState) {
             var db = state.students;
-            var img = db[widget.index][Constants.imageString];
+            var img = db[widget.index]["image"];
             return Scaffold(
               appBar: AppBar(
                 actions: [

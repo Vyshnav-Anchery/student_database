@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../data/student_database.dart';
 
@@ -45,6 +47,11 @@ class StudentsBloc extends Bloc<StudentsEvent, StudentsState> {
   FutureOr<void> deleteClickedEvent(
       DeleteClickedEvent event, Emitter<StudentsState> emit) async {
     await StudentDatabase.deleteData(event.index);
+    final prefs = await SharedPreferences.getInstance();
+    final dataList = await StudentDatabase.getAllStudents();
+    var student = dataList[event.index]['name'];
+    log(student);
+    // await prefs.setString('deletedStudent', student);
     emit(StudentDeletedActionState());
   }
 }

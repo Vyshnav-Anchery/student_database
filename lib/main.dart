@@ -6,7 +6,7 @@ import 'features/details/bloc/details_bloc.dart';
 import 'features/home/bloc/home_bloc.dart';
 import 'features/studentlist/bloc/students_bloc.dart';
 import 'firebase_options.dart';
-import 'utils/constants/routing.dart';
+import 'utils/routing/routing.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

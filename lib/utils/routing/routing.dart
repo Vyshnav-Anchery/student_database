@@ -7,7 +7,7 @@ import 'package:student_database/features/splashscreen/ui/splash_screen.dart';
 import '../../features/addstudent/ui/add_screen.dart';
 import '../../features/details/ui/details.dart';
 import '../../features/studentlist/ui/students_screen.dart';
-import 'constants.dart';
+import '../constants/constants.dart';
 
 class AppRouter {
 
